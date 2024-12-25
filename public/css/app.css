@@ -1,0 +1,264 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Body and Font Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0d1117; /* Dark blackish blue background */
+    color: #c9d1d9; /* Light text for readability */
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: #161b22; /* Slightly lighter dark background */
+    padding: 2rem 0;
+}
+
+header nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 40px;
+}
+
+header nav ul li a {
+    color: #c9d1d9;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+header nav ul li a:hover {
+    color: #58a6ff; /* Highlight color */
+}
+
+/* Hero Section Styles */
+.hero-section {
+    background: url('https://via.placeholder.com/1600x600') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 23, 0.8); /* Darker overlay */
+    z-index: 1;
+}
+
+.hero-section h1,
+.hero-section p,
+.cta-btn {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-section p {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #238636; /* Vibrant green button */
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #2ea043;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+    gap: 2rem;
+}
+
+.feature {
+    background-color: #161b22; /* Dark card background */
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 300px;
+    color: #c9d1d9;
+}
+
+.feature h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.feature p {
+    font-size: 1.4rem;
+    line-height: 1.5;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #161b22;
+    color: #c9d1d9;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Clickable H2 Styles */
+a h2 {
+    cursor: pointer;
+    text-decoration: none;
+    color: #c9d1d9;
+    font-weight: bold;
+}
+
+a h2:hover {
+    color: #58a6ff;
+}
+
+/* Container Adjustments */
+.container {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.container h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: #58a6ff; /* Highlighted blue for headings */
+}
+
+.container p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+    }
+
+    header nav ul li {
+        margin: 0 20px;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Hero Image Specific */
+.hero-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Features Section Background */
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 3rem auto; /* Center align with auto margin */
+    gap: 2rem;
+    background-color: #20262f; /* Slightly lighter dark gray background */
+    padding: 3rem 1rem; /* Increase padding for breathing space */
+    border-radius: 12px; /* Rounded edges for the entire section */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Feature Box Styling */
+.feature {
+    background-color: #161b22; /* Box background color */
+    border-radius: 12px; /* Slightly larger rounding for modern look */
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More defined shadow */
+    flex: 1;
+    max-width: 280px; /* Refined width for better layout control */
+    color: #c9d1d9; /* Text color for better contrast */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+/* Feature Box Hover Effect */
+.feature:hover {
+    transform: translateY(-10px); /* Lift on hover */
+    box-shadow: 0 10px 20px rgba(24, 26, 48, 0.3); /* Intense shadow on hover */
+    background-color: #4d5563; /* Slightly lighter background on hover */
+}
+
+/* Feature Title Styling */
+.feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #e6edf3; /* Make titles stand out */
+}
+
+/* Feature Paragraph Styling */
+.feature p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #adb5bd; /* Softer gray for readability */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column; /* Stack boxes on smaller screens */
+        align-items: center;
+    }
+
+    .feature {
+        max-width: 100%; /* Full width for smaller screens */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .feature {
+        max-width: 45%; /* Two items per row for medium screens */
+    }
+}
