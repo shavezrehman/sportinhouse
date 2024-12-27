@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
 
         // Return the edit view with the category data
-        return view('admin.categories.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     // Update an existing category (for admin)

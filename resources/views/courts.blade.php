@@ -1,32 +1,22 @@
 @extends('layouts.master')
 
-@section('title', 'All Courts')
+@section('title', 'Search Courts')
 
 @section('content')
-<div class="container my-5 bg-light p-4 rounded">
-    <h1 class="text-center mb-4">All Courts</h1>
+<div class="container my-3 bg-light p-4 rounded">
+    <h1 class="text-center mb-4">Search for Courts</h1>
 
-    <!-- Search and Filter Form -->
-    <div class="row mb-4">
-        <!-- Search Input -->
-        <div class="col-md-5 mb-3">
-            <input type="text" class="form-control" id="searchInput" placeholder="Search for courts...">
-        </div>
-
-        <!-- Category Filter -->
-        <div class="col-md-5 mb-3">
-            <select class="form-select" id="categoryFilter">
-                <option value="all">All Categories</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+    <!-- Search Bar -->
+    <div class="search-bar-container" style="position: relative;">
+        <input type="text" id="search-bar" class="form-control" placeholder="Search for courts..." autocomplete="off">
+        <ul id="search-results" class="dropdown-menu" style="position: absolute; width: 100%; z-index: 1000; display: none;">
+            <!-- Search results will appear here -->
+        </ul>
     </div>
 
-    <div id="searchResults" class="mt-3"></div>
+    </div>
 
-    <div class="row" id="courtContainer">
+    <div id="courtContainer" class="row">
         @foreach ($categories as $category)
             <h2 class="text-center mb-4">{{ $category->name }}</h2>
             

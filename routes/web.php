@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourtController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourtApiController;
+use App\Models\Court;
+use Illuminate\Http\Request;
+
 
 Route::get('/', function () {
     return view('welcome'); // Homepage view
@@ -14,9 +18,8 @@ Route::get('/dashboard', function () {
     return view('dashboard'); // Admin Dashboard view
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Booking Page Route
 Route::get('/booking', function () {
-    return view('booking'); // Booking page view
+    return view('booking');
 })->name('booking');
 
 // Contact Page Route
@@ -43,8 +46,35 @@ Route::prefix('admin')->group(function () {
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy'); // Delete category
 });
 
+
 // web.php
 Route::get('/courts', [PageController::class, 'courtsByCategory'])->name('courts');
+
+// Route for searching courts
+Route::get('/search-courts', function (Request $request) {
+    $query = $request->query('query', '');
+
+    // Filter courts based on the search query
+    $courts = Court::where('court_name', 'like', '%' . $query . '%')
+        ->orWhere('location', 'like', '%' . $query . '%')  // Also search by location
+        ->get();
+
+    // Prepare the data for the response
+    $courtsData = $courts->map(function ($court) {
+        return [
+            'id' => $court->id,
+            'court_name' => $court->court_name,
+            'location' => $court->location,
+            'capacity' => $court->capacity,
+            'price_per_hour' => $court->price_per_hour,
+            'image' => $court->image ? asset($court->image) : '/images/default-court.jpg',
+        ];
+    });
+
+    return response()->json([
+        'courts' => $courtsData,
+    ]);
+});
 
 // Authenticated User Profile Routes
 Route::middleware(['auth'])->group(function () {
