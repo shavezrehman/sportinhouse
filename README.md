@@ -1,70 +1,144 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+```
+# SportInHouse
 
-## About Laravel
+SportInHouse is an online platform designed to facilitate the booking of indoor sports courts. The platform allows users to explore various indoor courts for sports like futsal and football, check their availability, and make bookings seamlessly. The site is aimed at making sports more accessible to everyone by offering a hassle-free way to reserve court time.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Project Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Name**: SportInHouse
+- **Category**: Indoor Sports Booking Platform
+- **Technologies**: Laravel, Blade, Bootstrap, JavaScript, PHP, MySQL
+- **Target Audience**: Sports enthusiasts, teams, event organizers, and individuals looking to book indoor sports courts.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+- Search and filter options to easily find courts.
+- Transparent pricing and availability for each court.
+- Real-time booking system.
+- User-friendly interface with responsive design for all devices.
+- Court categories such as Futsal and Full-Field football.
+- Option to book courts by selecting date and time.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Setup Instructions
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Follow the steps below to set up the **SportInHouse** project on your local machine:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Prerequisites
 
-## Laravel Sponsors
+- **PHP** (7.4 or higher)
+- **Composer** (for managing PHP dependencies)
+- **MySQL** or **MariaDB** (for the database)
+- **XAMPP/WAMP** or similar for local development
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 1. Clone the Repository
 
-### Premium Partners
+Clone the repository to your local machine:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+git clone https://github.com/yourusername/SportInHouse.git
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
+cd SportInHouse
+```
+
+### 3. Install Dependencies
+
+Run the following command to install all required dependencies using Composer:
+
+```bash
+composer install
+```
+
+### 4. Set Up the Environment File
+
+Copy the `.env.example` file to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+### 5. Configure Your Database
+
+Make sure your database details are set in the `.env` file:
+
+```plaintext
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sportinhouse
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 6. Generate the Application Key
+
+Run the following command to generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+### 7. Run Migrations and Seed the Database
+
+To set up your database tables, run the migrations:
+
+```bash
+php artisan migrate
+```
+
+You can also run the seeder to add sample data:
+
+```bash
+php artisan db:seed
+```
+
+### 8. Start the Development Server
+
+To start the application locally, use the built-in Laravel server:
+
+```bash
+php artisan serve
+```
+
+Now you can access the project at `http://localhost:8000`.
+
+## Usage Guide
+
+Once the project is set up and running, follow these steps to use **SportInHouse**:
+
+### Searching for Courts
+- Use the **Search Bar** at the top of the page to search for courts by name.
+- You can also filter the courts by category (Futsal, Full-Field Football).
+
+### Booking a Court
+- Browse available courts.
+- Click on the **Book Now** button next to the court you wish to reserve.
+- Select a date and time for your booking, and fill out your contact information.
+- Confirm the booking and receive confirmation for your reservation.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+We welcome contributions to improve the **SportInHouse** project! If you'd like to contribute, please follow these steps:
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Make your changes and commit them (`git commit -am 'Add new feature'`).
+4. Push to your branch (`git push origin feature-name`).
+5. Create a new Pull Request.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# sportinhouse
->>>>>>> origin/main
+This project is open-source and available under the [MIT License](LICENSE).
+
+## Contact
+
+For questions or suggestions, please reach out via [your email address] or open an issue in the GitHub repository.
+
+---
+
+*Thank you for using SportInHouse!*
+```
