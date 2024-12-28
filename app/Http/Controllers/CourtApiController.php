@@ -1,74 +1,70 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Services;
+namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Services\CourtService; // Import the CourtService
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\Court;
-use Illuminate\Http\Request;
 
-class CourtApiController extends Controller
+class CourtService
 {
-    protected $courtService;
-
-    // Inject the CourtService
-    public function __construct(CourtService $courtService)
-    {
-        $this->courtService = $courtService;
-    }
-
     // Get all courts
-    public function index()
+    public function getAllCourts()
     {
-        $courts = $this->courtService->getAllCourts(); // Use the service to fetch all courts
-        return response()->json($courts, 200);
+        return Court::all(); // Return all courts from the database
     }
 
     // Get courts by category
-    public function showCourts($categoryId)
+    public function getCourtsByCategory($categoryId)
     {
-        $courts = $this->courtService->getCourtsByCategory($categoryId); // Get courts by category
-        return response()->json($courts, 200);
+        return Court::where('category_id', $categoryId)->get(); // Return courts by category
     }
 
     // Store a new court
-    public function store(Request $request)
+    public function storeCourt($data)
     {
-        $validated = $request->validate([
-            'court_name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'capacity' => 'required|integer|min:1',
-            'price_per_hour' => 'required|numeric|min:0',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        // Handle image upload and storing of court
+        $imagePath = $data['image']->store('courts', 'public'); // Store the image
 
-        $court = $this->courtService->storeCourt($request->all()); // Use service to store the court
-        return response()->json($court, 201); // Return the newly created court with 201 status
+        // Create and return the new court record
+        return Court::create([
+            'court_name' => $data['court_name'],
+            'location' => $data['location'],
+            'capacity' => $data['capacity'],
+            'price_per_hour' => $data['price_per_hour'],
+            'category_id' => $data['category_id'],
+            'image' => $imagePath,
+        ]);
     }
 
     // Update an existing court
-    public function update(Request $request, $id)
+    public function updateCourt(Court $court, $data)
     {
-        $validated = $request->validate([
-            'court_name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'capacity' => 'required|integer|min:1',
-            'price_per_hour' => 'required|numeric|min:0',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        // Handle image update if new image is provided
+        if (isset($data['image'])) {
+            $imagePath = $data['image']->store('courts', 'public');
+            $court->image = $imagePath;
+        }
 
-        $court = Court::findOrFail($id);
-        $this->courtService->updateCourt($court, $request->all()); // Use service to update court
-        return response()->json($court, 200); // Return the updated court
+        $court->court_name = $data['court_name'];
+        $court->location = $data['location'];
+        $court->capacity = $data['capacity'];
+        $court->price_per_hour = $data['price_per_hour'];
+        $court->category_id = $data['category_id'];
+
+        $court->save(); // Save the updated court record
     }
 
     // Delete a court
-    public function destroy($id)
+    public function deleteCourt(Court $court)
     {
-        $court = Court::findOrFail($id);
-        $this->courtService->deleteCourt($court); // Use service to delete court
-        return response()->json(null, 204); // Return a no-content response
+        // Delete the image file from storage if necessary
+        if ($court->image) {
+            Storage::disk('public')->delete($court->image);
+
+        }
+
+        $court->delete(); // Delete the court from the database
     }
 }

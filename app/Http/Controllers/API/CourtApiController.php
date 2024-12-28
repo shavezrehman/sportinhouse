@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Services\CourtService;
 use App\Http\Controllers\Controller;
@@ -39,7 +39,7 @@ class CourtApiController extends Controller
             'capacity' => 'required|integer|min:1',
             'price_per_hour' => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',  // Validate category ID
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  // Validate image upload
+            'image' => 'nullable    |image|mimes:jpeg,png,jpg,gif,svg|max:2048',  // Validate image upload
         ]);
 
         $this->courtService->createCourt($validated);  // Call service to create court
