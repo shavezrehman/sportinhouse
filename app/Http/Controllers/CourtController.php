@@ -16,6 +16,25 @@ class CourtController extends Controller
         $this->courtService = $courtService;  // Inject the CourtService
     }
 
+    public function index()
+    {
+        try {
+            // Fetch all courts using the service layer
+            $courts = $this->courtService->getAllCourts();
+
+            return response()->json([
+                'success' => true,
+                'data' => $courts,
+            ], 200);
+
+        } catch (\Exception $e) {
+            // Handle any errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve courts. ' . $e->getMessage(),
+            ], 500);
+        }
+    }
     // Display the list of courts for the admin panel
     public function adminIndex()
     {

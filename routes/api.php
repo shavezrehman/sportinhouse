@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\CourtApiController;
 
-Route::prefix('admin')->group(function () {
+Route::middleware('auth:api')->prefix('admin')->group(function () {
     // Admin API Routes for Courts
 
     // Get all courts

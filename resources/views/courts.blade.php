@@ -9,14 +9,10 @@
     <!-- Search Bar -->
     <div class="search-bar-container" style="position: relative;">
         <input type="text" id="search-bar" class="form-control" placeholder="Search for courts..." autocomplete="off">
-        <ul id="search-results" class="dropdown-menu" style="position: absolute; width: 100%; z-index: 1000; display: none;">
-            <!-- Search results will appear here -->
-        </ul>
     </div>
 
-    </div>
-
-    <div id="courtContainer" class="row">
+    <!-- Courts Display Container -->
+    <div id="courtContainer" class="row mt-4">
         @foreach ($categories as $category)
             <h2 class="text-center mb-4">{{ $category->name }}</h2>
             
@@ -41,7 +37,6 @@
                                         <strong>Capacity:</strong> {{ $court->capacity }} people<br>
                                         <strong>Price per Hour:</strong> $ {{ $court->price_per_hour }} per hour
                                     </p>
-                                    <!-- Modal Trigger Button -->
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal{{ $court->id }}">
                                         Book Now
                                     </button>

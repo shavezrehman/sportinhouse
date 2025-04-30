@@ -1,18 +1,24 @@
 <?php
-// PageController.php
+
 namespace App\Http\Controllers;
 
-use App\Models\Category; // Import the Category model
+use App\Models\Category; 
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function courtsByCategory()
+    public function courtsByCategory(Request $request)
     {
-        // Get all categories with their associated courts
-        $categories = Category::with('courts')->get();
+        $query = $request->input('query');
 
-        // Pass the categories variable to the view
-        return view('courts', compact('categories'));
+        $categories = Category::with(['courts' => function ($queryBuilder) use ($query) {
+            if ($query) {
+                $queryBuilder->where('court_name', 'like', "%{$query}%")
+                             ->orWhere('location', 'like', "%{$query}%");
+            }
+        }])->get();
+
+        // Pass the categories and query to the view
+        return view('courts', compact('categories', 'query'));
     }
 }
